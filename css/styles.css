@@ -1509,6 +1509,8 @@ body::before {
 /* ============================
    RESPONSIVE
    ============================ */
+
+/* ---------- Tablet (1024px) ---------- */
 @media (max-width: 1024px) {
   .summary-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1518,16 +1520,18 @@ body::before {
   }
 }
 
+/* ---------- Mobile (768px) ---------- */
 @media (max-width: 768px) {
   .app-wrapper {
-    padding: 0 16px 48px;
+    padding: 0 14px 48px;
   }
 
+  /* Header */
   .app-header {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
-    padding: 16px 0 24px;
+    padding: 16px 0 20px;
   }
 
   .header-brand {
@@ -1536,67 +1540,226 @@ body::before {
 
   .month-selector {
     justify-content: center;
+    align-self: center;
+  }
+
+  .month-display {
+    min-width: 130px;
+    font-size: 1rem;
   }
 
   .header-actions {
     justify-content: center;
   }
 
+  .header-actions .btn-download {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Summary Cards */
   .summary-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .summary-card {
+    padding: 16px 14px;
+  }
+
+  .card-top {
+    margin-bottom: 10px;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+
+  .card-label {
+    font-size: 0.7rem;
   }
 
   .card-value {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
+    word-break: break-all;
   }
 
+  /* Glass card sections */
   .glass-card {
-    padding: 20px 16px;
+    padding: 18px 14px;
     border-radius: var(--radius-lg);
   }
 
   .chart-card {
-    padding: 20px 16px;
+    padding: 18px 14px;
   }
 
+  /* Section headers & actions */
   .section-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .section-title {
+    font-size: 1.05rem;
   }
 
   .section-actions {
     width: 100%;
     flex-wrap: wrap;
+    gap: 8px;
   }
 
   .section-actions .btn {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    text-align: center;
+    justify-content: center;
   }
 
   .section-actions .filter-select {
-    flex: 1;
+    flex: 1 1 45%;
     min-width: 0;
+    font-size: 0.78rem;
+    padding: 8px 28px 8px 10px;
   }
 
+  /* Salary entries */
+  .salary-entry {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .salary-value {
+    font-size: 1rem;
+    order: 0;
+  }
+
+  /* --- Mobile card layout for transactions table --- */
+  .table-wrapper {
+    margin: 0;
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .data-table {
+    font-size: 0.85rem;
+  }
+
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    position: relative;
+  }
+
+  .data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(139, 92, 246, 0.2);
+  }
+
+  .data-table tbody td {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+    border-bottom: none;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .data-table tbody td::before {
+    content: attr(data-label);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  /* Description spans full width */
+  .data-table tbody td:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  /* Actions row — full width, aligned right */
+  .data-table tbody td:last-child {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 4px;
+  }
+
+  .data-table tbody td:last-child::before {
+    display: none;
+  }
+
+  .row-actions {
+    opacity: 1;
+    gap: 8px;
+  }
+
+  .row-actions .btn-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Forms */
   .form-row {
     grid-template-columns: 1fr;
   }
 
+  /* Modals */
+  .modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
   .modal-content {
-    padding: 24px 20px;
-    border-radius: var(--radius-lg);
+    padding: 24px 18px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-height: 92vh;
   }
 
-  .data-table {
-    font-size: 0.8rem;
+  .modal-content.modal-sm {
+    max-width: 100%;
   }
 
-  .data-table thead th,
-  .data-table tbody td {
-    padding: 10px 10px;
+  .modal-title {
+    font-size: 1.1rem;
   }
 
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  /* Footer */
   .footer-content {
     flex-direction: column;
     gap: 4px;
@@ -1605,24 +1768,275 @@ body::before {
   .footer-separator {
     display: none;
   }
-}
 
-@media (max-width: 480px) {
-  .summary-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-text h1 {
-    font-size: 1.25rem;
-  }
-
+  /* Toast */
   .toast-container {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
   }
 
   .toast {
     min-width: auto;
+  }
+
+  /* Budget bars */
+  .budget-header {
+    gap: 4px;
+  }
+
+  .budget-title {
+    font-size: 0.82rem;
+  }
+
+  .budget-vals {
+    font-size: 0.78rem;
+  }
+}
+
+/* ---------- Small Mobile (480px) ---------- */
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding: 0 10px 40px;
+  }
+
+  /* Summary cards go single column */
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .summary-card {
+    padding: 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .summary-card::before {
+    width: 3px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .card-top {
+    margin-bottom: 0;
+    flex-direction: row;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .card-label {
+    font-size: 0.68rem;
+  }
+
+  .card-value {
+    font-size: 1.15rem;
+    margin-left: auto;
+    text-align: right;
+    word-break: break-all;
+  }
+
+  /* Header */
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 19px;
+  }
+
+  .brand-text h1 {
+    font-size: 1.2rem;
+  }
+
+  .brand-text p {
+    font-size: 0.7rem;
+  }
+
+  .month-display {
+    min-width: 110px;
+    font-size: 0.92rem;
+  }
+
+  .month-nav-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  /* Section actions — stack vertically */
+  .section-actions {
+    flex-direction: column;
+  }
+
+  .section-actions .btn,
+  .section-actions .filter-select {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+  }
+
+  /* Glass card */
+  .glass-card {
+    padding: 14px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .chart-card {
+    padding: 16px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Transactions card layout — single column */
+  .data-table tbody tr {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  /* Category badge */
+  .category-badge {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+  }
+
+  .class-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .status-toggle {
+    padding: 3px 8px;
+  }
+
+  .status-label {
+    font-size: 0.75rem;
+  }
+
+  .value-display {
+    font-size: 0.9rem;
+  }
+
+  .payment-badge {
+    font-size: 0.78rem;
+  }
+
+  /* Salary entries */
+  .salary-entry {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .salary-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .salary-desc {
+    font-size: 0.82rem;
+  }
+
+  .salary-day {
+    font-size: 0.72rem;
+  }
+
+  .salary-value {
+    font-size: 0.95rem;
+  }
+
+  /* Modal */
+  .modal-content {
+    padding: 20px 14px;
+  }
+
+  .form-group label {
+    font-size: 0.72rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Delete modal */
+  .delete-modal-body .delete-icon {
+    font-size: 2.4rem;
+  }
+
+  .delete-modal-body p {
+    font-size: 0.85rem;
+  }
+
+  /* Chart legend */
+  .legend-item {
+    font-size: 0.78rem;
+    gap: 8px;
+  }
+
+  .legend-pct {
+    font-size: 0.72rem;
+    min-width: 36px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    padding: 40px 12px;
+  }
+
+  .empty-state .empty-icon {
+    font-size: 2.8rem;
+  }
+
+  .empty-state p {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- Extra Small (360px) ---------- */
+@media (max-width: 360px) {
+  .app-wrapper {
+    padding: 0 8px 36px;
+  }
+
+  .card-value {
+    font-size: 1rem;
+  }
+
+  .brand-text h1 {
+    font-size: 1.1rem;
+  }
+
+  .month-display {
+    min-width: 90px;
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 9px 12px;
+    font-size: 0.78rem;
+  }
+
+  .modal-content {
+    padding: 18px 12px;
   }
 }

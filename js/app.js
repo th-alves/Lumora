@@ -196,18 +196,18 @@ const App = (() => {
             const val = Math.abs(parseFloat(t.value) || 0);
             return `
             <tr data-id="${t.id}">
-                <td>${formatDate(t.date)}</td>
-                <td><span class="category-badge ${t.category}">${CATEGORY_LABELS[t.category] || t.category}</span></td>
-                <td>${t.description || '—'}</td>
-                <td>
+                <td data-label="Data">${formatDate(t.date)}</td>
+                <td data-label="Categoria"><span class="category-badge ${t.category}">${CATEGORY_LABELS[t.category] || t.category}</span></td>
+                <td data-label="Descrição">${t.description || '—'}</td>
+                <td data-label="Pagamento">
                     <span class="payment-badge">
                         <span class="pay-icon">${PAYMENT_ICONS[t.paymentMethod] || '💳'}</span>
                         ${PAYMENT_LABELS[t.paymentMethod] || t.paymentMethod}
                     </span>
                 </td>
-                <td><span class="class-badge ${t.classification}">${CLASS_LABELS[t.classification] || t.classification}</span></td>
-                <td><span class="value-display value-negative">- ${fmt(val)}</span></td>
-                <td>
+                <td data-label="Classificação"><span class="class-badge ${t.classification}">${CLASS_LABELS[t.classification] || t.classification}</span></td>
+                <td data-label="Valor"><span class="value-display value-negative">- ${fmt(val)}</span></td>
+                <td data-label="Status">
                     <span class="status-toggle" data-toggle-status="${t.id}" title="Clique para alternar">
                         <span class="status-dot ${t.status}"></span>
                         <span class="status-label ${t.status}">${t.status === 'pago' ? 'Pago' : 'Pendente'}</span>
