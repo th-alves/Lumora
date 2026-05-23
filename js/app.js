@@ -672,11 +672,17 @@ const App = (() => {
         /* Delegation for dynamic elements */
         setupDelegation();
 
-        /* Resize handler for donut chart */
+        /* Resize handler for donut chart — only on width change.
+           iOS Safari fires 'resize' on scroll when browser chrome hides/shows
+           (viewport height changes). Ignoring height-only changes prevents the
+           donut from restarting its animation every time the user scrolls. */
         let resizeTimer;
+        let _lastResizeW = window.innerWidth;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
+                if (window.innerWidth === _lastResizeW) return;
+                _lastResizeW = window.innerWidth;
                 const md = Storage.getMonthData(currentMonthKey);
                 const totals = Storage.calculateTotals(md);
                 Charts.renderDonut($('chart-donut'), totals.categoryBreakdown, totals.totalSpent);

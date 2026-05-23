@@ -1356,9 +1356,16 @@ body::before {
   max-width: 560px;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
   transform: translateY(30px) scale(0.95);
   transition: var(--transition-med);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* iOS Safari: input[type="date"] ignores width:100% intrinsic minimum.
+   min-width:0 forces it to respect its container width. */
+input[type="date"] {
+  min-width: 0;
 }
 
 .modal-overlay.active .modal-content {
