@@ -5,8 +5,8 @@
 /* ---------- CSS Custom Properties ---------- */
 :root {
   /* Backgrounds */
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #0f0f23;
+  --bg-primary: #0d1b2a;
+  --bg-secondary: #0f2540;
   --bg-card: rgba(255, 255, 255, 0.04);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
   --bg-card-border: rgba(255, 255, 255, 0.08);
@@ -18,34 +18,41 @@
   --text-secondary: rgba(255, 255, 255, 0.55);
   --text-muted: rgba(255, 255, 255, 0.3);
 
-  /* Accents */
-  --accent-purple: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4);
-  --accent-gradient-h: linear-gradient(90deg, #8b5cf6, #06b6d4);
+  /* Accents - Mint Fresco */
+  --accent-purple: #1dd1a1;
+  --accent-cyan: #54a0ff;
+  --accent-gradient: linear-gradient(135deg, #1dd1a1, #54a0ff);
+  --accent-gradient-h: linear-gradient(90deg, #1dd1a1, #54a0ff);
 
   /* Category Colors */
-  --cat-receita: #22c55e;
-  --cat-contas: #f97316;
-  --cat-parcela: #eab308;
-  --cat-assinatura: #14b8a6;
-  --cat-fatura: #a855f7;
-  --cat-futuro: #3b82f6;
+  --cat-receita: #1dd1a1;
+  --cat-contas: #ff9ff3;
+  --cat-parcela: #54a0ff;
+  --cat-assinatura: #48dbfb;
+  --cat-fatura: #1dd1a1;
+  --cat-futuro: #54a0ff;
 
   /* Status */
-  --status-paid: #22c55e;
-  --status-pending: #f59e0b;
+  --status-paid: #1dd1a1;
+  --status-pending: #ff9ff3;
 
   /* Summary Cards */
-  --card-income: #22c55e;
-  --card-spent: #ef4444;
-  --card-remaining: #8b5cf6;
-  --card-pending: #f59e0b;
+  --card-income: #1dd1a1;
+  --card-spent: #ff9ff3;
+  --card-remaining: #54a0ff;
+  --card-pending: #ffa502;
 
   /* Misc */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
+  --radius-xl: 24px;
+  --shadow-glow: 0 0 40px rgba(29, 209, 161, 0.12);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-med: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --blur: 24px;
+
   --radius-xl: 24px;
   --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.08);
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -428,7 +435,7 @@ body::before {
 .import-stat-value {
   font-size: 28px;
   font-weight: 700;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -501,7 +508,7 @@ body::before {
   font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -1366,6 +1373,11 @@ body::before {
    min-width:0 forces it to respect its container width. */
 input[type="date"] {
   min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .modal-overlay.active .modal-content {
@@ -1738,7 +1750,6 @@ input[type="date"] {
     padding: 0 14px 48px;
   }
 
-
   /* Header */
   .app-header {
     flex-direction: column;
@@ -1950,11 +1961,11 @@ input[type="date"] {
   .form-row {
     display: block;
   }
-  
+
   .form-group {
     margin-bottom: 12px;
   }
-  
+
   .form-group input,
   .form-group select {
     width: 100%;
@@ -2020,13 +2031,25 @@ input[type="date"] {
   }
 
   @keyframes toastIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes toastOut {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(20px); }
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(20px);
+    }
   }
 
   /* Budget bars */

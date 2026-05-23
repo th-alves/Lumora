@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dashboard de Controle Financeiro Pessoal — Gerencie seus gastos mensais com a regra 50/30/20"
+      content="Dashboard de Controle Financeiro Pessoal"
     />
     <title>Lumora Finance</title>
 
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤑</text></svg>"
     />
   </head>
   <body>
@@ -28,7 +28,7 @@
       <!-- ========== HEADER ========== -->
       <header class="app-header">
         <div class="header-brand">
-          <div class="brand-icon">💰</div>
+          <div class="brand-icon">🤑</div>
           <div class="brand-text">
             <h1>Lumora</h1>
             <p>Iluminamos sua vida financeira</p>
@@ -59,7 +59,7 @@
           type="file"
           id="import-file-input"
           accept=".xlsx,.xls,.csv"
-          style="display:none"
+          style="display: none"
         />
       </header>
 
@@ -401,32 +401,42 @@
 
         <!-- Mês destino (exibido apenas quando há UMA aba sem mês detectado) -->
         <div id="import-month-section" class="import-section-block">
-          <label for="import-month-select" class="import-section-label">Importar para o mês</label>
-          <select class="filter-select import-month-select-wrapper" id="import-month-select"></select>
+          <label for="import-month-select" class="import-section-label"
+            >Importar para o mês</label
+          >
+          <select
+            class="filter-select import-month-select-wrapper"
+            id="import-month-select"
+          ></select>
         </div>
 
         <!-- Comportamento -->
-        <div class="form-group" style="margin-top:16px;">
+        <div class="form-group" style="margin-top: 16px">
           <label class="import-section-label">Comportamento</label>
           <div class="import-mode-options">
             <label class="import-mode-option">
               <input type="radio" name="import-mode" value="add" checked />
               <div class="import-mode-text">
                 <strong>Adicionar</strong>
-                <small>Mantém os dados existentes e acrescenta os importados</small>
+                <small
+                  >Mantém os dados existentes e acrescenta os importados</small
+                >
               </div>
             </label>
             <label class="import-mode-option">
               <input type="radio" name="import-mode" value="replace" />
               <div class="import-mode-text">
                 <strong>Substituir</strong>
-                <small>Apaga todos os dados do(s) mês(es) e substitui pelos importados</small>
+                <small
+                  >Apaga todos os dados do(s) mês(es) e substitui pelos
+                  importados</small
+                >
               </div>
             </label>
           </div>
         </div>
 
-        <div class="modal-actions" style="margin-top:24px;">
+        <div class="modal-actions" style="margin-top: 24px">
           <button class="btn btn-secondary" id="import-cancel">Cancelar</button>
           <button class="btn btn-primary" id="import-confirm">Importar</button>
         </div>
