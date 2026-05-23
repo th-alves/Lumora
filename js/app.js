@@ -425,6 +425,118 @@ const App = (() => {
         toast('Planilha exportada com sucesso! 📥');
     }
 
+    /* -- Import -- */
+    function onImportClick() {
+        $('import-file-input').click();
+    }
+
+    async function onImportFileSelected(e) {
+        const file = e.target.files[0];
+        e.target.value = '';
+        if (!file) return;
+
+        try {
+            const groups = await ImportModule.handleFile(file, currentMonthKey);
+
+            if (!groups || groups.length === 0) {
+                toast('Nenhum dado encontrado na planilha. Verifique o formato.', 'error');
+                return;
+            }
+
+            /* Totais globais */
+            const totalTx  = groups.reduce((s, g) => s + g.transactions.length, 0);
+            const totalSal = groups.reduce((s, g) => s + g.salaries.length, 0);
+            $('import-tx-count').textContent  = totalTx;
+            $('import-sal-count').textContent = totalSal;
+
+            const sheetsSection = $('import-sheets-section');
+            const monthSection  = $('import-month-section');
+            const sheetsList    = $('import-sheets-list');
+
+            /* Múltiplas abas com mês detectado → mostra lista de abas */
+            if (groups.length > 1 || (groups.length === 1 && groups[0].detectedMonthKey)) {
+                sheetsSection.style.display = 'block';
+                monthSection.style.display  = 'none';
+
+                sheetsList.innerHTML = groups.map(g => `
+                    <div class="import-sheet-row">
+                        <div class="import-sheet-info">
+                            <span class="import-sheet-name">${g.sheetName}</span>
+                            <span class="import-sheet-month">${g.detectedMonthKey ? Storage.getMonthName(g.detectedMonthKey) : '—'}</span>
+                        </div>
+                        <div class="import-sheet-counts">
+                            <span>${g.transactions.length} transações</span>
+                            ${g.salaries.length > 0 ? `<span>${g.salaries.length} renda(s)</span>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+
+            } else {
+                /* Aba única sem mês detectado → mostra selector de mês */
+                sheetsSection.style.display = 'none';
+                monthSection.style.display  = 'block';
+
+                const select = $('import-month-select');
+                select.innerHTML = '';
+                let pivot = currentMonthKey;
+                for (let i = 12; i > 0; i--) pivot = Storage.navigateMonth(pivot, -1);
+                const monthKeys = [];
+                for (let i = 0; i < 25; i++) {
+                    monthKeys.push(pivot);
+                    pivot = Storage.navigateMonth(pivot, 1);
+                }
+                if (!monthKeys.includes(currentMonthKey)) monthKeys.push(currentMonthKey);
+                monthKeys.sort();
+                monthKeys.forEach(key => {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = Storage.getMonthName(key);
+                    if (key === currentMonthKey) opt.selected = true;
+                    select.appendChild(opt);
+                });
+            }
+
+            /* Reseta modo */
+            const addRadio = document.querySelector('input[name="import-mode"][value="add"]');
+            if (addRadio) addRadio.checked = true;
+
+            openModal('import-modal');
+
+        } catch (err) {
+            console.error('Erro ao importar planilha:', err);
+            toast('Erro ao processar o arquivo. Verifique se é um .xlsx ou .csv válido.', 'error');
+        }
+    }
+
+    function onImportConfirm() {
+        const mode = document.querySelector('input[name="import-mode"]:checked').value;
+
+        /* Se no modo mês único (fallback), ajusta o monthKey do grupo */
+        const monthSection = $('import-month-section');
+        if (monthSection.style.display !== 'none') {
+            ImportModule.overrideSingleMonthKey($('import-month-select').value);
+        }
+
+        /* Captura o mês da primeira aba ANTES de confirmImport limpar _pending */
+        const navigateTo = ImportModule.getFirstMonthKey() || currentMonthKey;
+
+        const success = ImportModule.confirmImport(mode);
+        if (!success) {
+            toast('Nenhum dado para importar.', 'error');
+            return;
+        }
+
+        closeModal('import-modal');
+        currentMonthKey = navigateTo;
+        renderAll();
+        toast('Dados importados com sucesso! 📤');
+    }
+
+    function onImportCancel() {
+        ImportModule.clearPending();
+        closeModal('import-modal');
+    }
+
     /* -- Copy from last month -- */
     function onCopyFromLastMonth() {
         const prevMonthKey = Storage.navigateMonth(currentMonthKey, -1);
@@ -531,6 +643,13 @@ const App = (() => {
         $('add-transaction-btn').addEventListener('click', onAddTransaction);
         $('copy-last-month-btn').addEventListener('click', onCopyFromLastMonth);
         $('download-btn').addEventListener('click', onDownload);
+
+        /* Import */
+        $('import-btn').addEventListener('click', onImportClick);
+        $('import-file-input').addEventListener('change', onImportFileSelected);
+        $('import-confirm').addEventListener('click', onImportConfirm);
+        $('import-cancel').addEventListener('click', onImportCancel);
+        $('modal-close-import').addEventListener('click', onImportCancel);
 
         /* Salary modal */
         $('salary-form').addEventListener('submit', onSalarySubmit);

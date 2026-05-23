@@ -46,10 +46,21 @@
         </div>
 
         <div class="header-actions">
+          <button class="btn btn-upload" id="import-btn">
+            <span>📤</span> Importar Planilha
+          </button>
           <button class="btn btn-download" id="download-btn">
             <span>📥</span> Exportar Planilha
           </button>
         </div>
+
+        <!-- Input oculto para seleção de arquivo -->
+        <input
+          type="file"
+          id="import-file-input"
+          accept=".xlsx,.xls,.csv"
+          style="display:none"
+        />
       </header>
 
       <!-- ========== SUMMARY CARDS ========== -->
@@ -359,6 +370,69 @@
       </div>
     </div>
 
+    <!-- ========== IMPORT MODAL ========== -->
+    <div class="modal-overlay" id="import-modal">
+      <div class="modal-content modal-md">
+        <div class="modal-header">
+          <h3 class="modal-title">Importar Planilha</h3>
+          <button class="modal-close" id="modal-close-import">×</button>
+        </div>
+
+        <!-- Totais encontrados -->
+        <div class="import-summary">
+          <div class="import-stat">
+            <span class="import-stat-icon">📋</span>
+            <span class="import-stat-value" id="import-tx-count">0</span>
+            <span class="import-stat-label">Transações</span>
+          </div>
+          <div class="import-stat-divider"></div>
+          <div class="import-stat">
+            <span class="import-stat-icon">💵</span>
+            <span class="import-stat-value" id="import-sal-count">0</span>
+            <span class="import-stat-label">Rendas</span>
+          </div>
+        </div>
+
+        <!-- Lista de abas/meses detectados (preenchida dinamicamente) -->
+        <div id="import-sheets-section" class="import-section-block">
+          <label class="import-section-label">Abas detectadas</label>
+          <div class="import-sheets-list" id="import-sheets-list"></div>
+        </div>
+
+        <!-- Mês destino (exibido apenas quando há UMA aba sem mês detectado) -->
+        <div id="import-month-section" class="import-section-block">
+          <label for="import-month-select" class="import-section-label">Importar para o mês</label>
+          <select class="filter-select import-month-select-wrapper" id="import-month-select"></select>
+        </div>
+
+        <!-- Comportamento -->
+        <div class="form-group" style="margin-top:16px;">
+          <label class="import-section-label">Comportamento</label>
+          <div class="import-mode-options">
+            <label class="import-mode-option">
+              <input type="radio" name="import-mode" value="add" checked />
+              <div class="import-mode-text">
+                <strong>Adicionar</strong>
+                <small>Mantém os dados existentes e acrescenta os importados</small>
+              </div>
+            </label>
+            <label class="import-mode-option">
+              <input type="radio" name="import-mode" value="replace" />
+              <div class="import-mode-text">
+                <strong>Substituir</strong>
+                <small>Apaga todos os dados do(s) mês(es) e substitui pelos importados</small>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-actions" style="margin-top:24px;">
+          <button class="btn btn-secondary" id="import-cancel">Cancelar</button>
+          <button class="btn btn-primary" id="import-confirm">Importar</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== TOAST CONTAINER ========== -->
     <div class="toast-container" id="toast-container"></div>
 
@@ -367,6 +441,7 @@
     <script src="js/storage.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/export.js"></script>
+    <script src="js/import.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
