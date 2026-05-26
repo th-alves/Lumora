@@ -9,13 +9,15 @@ const ExportModule = (() => {
         'parcela':    'Parcela',
         'assinatura': 'Assinatura',
         'fatura':     'Fatura',
-        'futuro':     'Futuro'
+        'futuro':     'Futuro',
+        'compras':    'Compras'
     };
 
     const PAYMENT_LABELS = {
         'pix':            'Pix',
         'conta-corrente': 'Conta Corrente',
         'cartao-credito': 'Cartão de Crédito',
+        'cartao-debito':  'Cartão de Débito',
         'dinheiro':       'Dinheiro',
         'boleto':         'Boleto'
     };

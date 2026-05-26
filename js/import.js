@@ -9,7 +9,8 @@ const ImportModule = (() => {
         'parcela':    'parcela',
         'assinatura': 'assinatura',
         'fatura':     'fatura',
-        'futuro':     'futuro'
+        'futuro':     'futuro',
+        'compras':    'compras'
     };
 
     const PAY_MAP = {
@@ -17,6 +18,8 @@ const ImportModule = (() => {
         'conta corrente':    'conta-corrente',
         'cartao de credito': 'cartao-credito',
         'cartao credito':    'cartao-credito',
+        'cartao de debito':  'cartao-debito',
+        'cartao debito':     'cartao-debito',
         'dinheiro':          'dinheiro',
         'boleto':            'boleto'
     };

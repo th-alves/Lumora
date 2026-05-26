@@ -31,6 +31,7 @@
   --cat-assinatura: #48dbfb;
   --cat-fatura: #1dd1a1;
   --cat-futuro: #54a0ff;
+  --cat-compras: #ec4899;
 
   /* Status */
   --status-paid: #1dd1a1;
@@ -1160,6 +1161,10 @@ body::before {
 .category-badge.futuro {
   background: rgba(59, 130, 246, 0.12);
   color: #60a5fa;
+}
+.category-badge.compras {
+  background: rgba(236, 72, 153, 0.12);
+  color: #f472b6;
 }
 
 /* Classification badges */

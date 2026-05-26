@@ -8,7 +8,8 @@ const Charts = (() => {
         'parcela':     '#eab308',
         'assinatura':  '#14b8a6',
         'fatura':      '#a855f7',
-        'futuro':      '#3b82f6'
+        'futuro':      '#3b82f6',
+        'compras':     '#ec4899'
     };
 
     const CATEGORY_LABELS = {
@@ -16,7 +17,8 @@ const Charts = (() => {
         'parcela':     'Parcela',
         'assinatura':  'Assinatura',
         'fatura':      'Fatura',
-        'futuro':      'Futuro'
+        'futuro':      'Futuro',
+        'compras':     'Compras'
     };
 
     let _donutRAF = null;

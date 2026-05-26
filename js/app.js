@@ -14,17 +14,18 @@ const App = (() => {
     /* ---------- Label maps ---------- */
     const CATEGORY_LABELS = {
         'contas': 'Contas', 'parcela': 'Parcela', 'assinatura': 'Assinatura',
-        'fatura': 'Fatura', 'futuro': 'Futuro'
+        'fatura': 'Fatura', 'futuro': 'Futuro', 'compras': 'Compras'
     };
 
     const PAYMENT_LABELS = {
         'pix': 'Pix', 'conta-corrente': 'Conta Corrente',
-        'cartao-credito': 'Cartão de Crédito', 'dinheiro': 'Dinheiro', 'boleto': 'Boleto'
+        'cartao-credito': 'Cartão de Crédito', 'cartao-debito': 'Cartão de Débito',
+        'dinheiro': 'Dinheiro', 'boleto': 'Boleto'
     };
 
     const PAYMENT_ICONS = {
         'pix': '⚡', 'conta-corrente': '🏦', 'cartao-credito': '💳',
-        'dinheiro': '💵', 'boleto': '📄'
+        'cartao-debito': '💳', 'dinheiro': '💵', 'boleto': '📄'
     };
 
     const CLASS_LABELS = {
